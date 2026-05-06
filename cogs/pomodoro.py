@@ -8,7 +8,7 @@ from database import (
     set_phase, end_session
 )
 
-with open("data/playlists.json") as f:
+with open("data/playlists.json", encoding="utf-8") as f:
     PLAYLISTS = json.load(f)["playlists"]
 
 PLAYLIST_CHOICES = [
