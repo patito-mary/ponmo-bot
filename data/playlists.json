@@ -1,0 +1,52 @@
+{
+    "playlists": [
+        {
+            "id": "lofi-girl",
+            "name": "Lofi Girl · Study Beats",
+            "url": "https://www.youtube.com/watch?v=jfKfPfyJRdk",
+            "emoji": "𝄢"
+        },
+        {
+            "id": "lofi-chillhop",
+            "name": "Chillhop Music",
+            "url": "https://www.youtube.com/watch?v=5yx6BWlEVcY",
+            "emoji": "𝄢♬"
+        },
+        {
+            "id": "lofi-synthwave",
+            "name": "Synthwave · Dark Study",
+            "url": "https://www.youtube.com/watch?v=4xDzrJKXOOY",
+            "emoji": "♬🌃"
+        },
+        {
+            "id": "lofi-billie",
+            "name": "Billie Lofi · Study Beats",
+            "url": "https://youtu.be/mp1DgozilpA?si=DcZQxzguMSBJqCqz",
+            "emoji": "♬"
+        },
+        {
+            "id": "lofi-daft-punk",
+            "name": "Daft Punk Lofi",
+            "url": "https://youtu.be/K1k35lDpzdw?si=XK-BRAAzL2cH-rVT",
+            "emoji": "♬🤖"
+        },
+        {
+            "id": "lofi-naruto",
+            "name": "Naruto lofi",
+            "url": "https://youtu.be/xmLszyYZdiw?si=YVmhUJn8W_2oZhZ3",
+            "emoji": "♬🍃"
+        },
+        {
+            "id": "driver-tame-impala",
+            "name": "Tame Impala - Ride with me",
+            "url": "https://youtu.be/WILAKNGxF9c?si=avpRj3vQCMZ35Jnr",
+            "emoji": "🚗🎶"
+        },
+        {
+            "id": "watoncita",
+            "name": "Watoncita",
+            "url": "https://youtu.be/xKMJiTbJ8EE?si=brpp2hQkA1iRmGSq",
+            "emoji": "🎵"
+        }
+    ]
+}

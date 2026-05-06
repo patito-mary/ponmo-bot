@@ -1,0 +1,24 @@
+# Variables de entorno - NUNCA subir
+.env
+
+# Base de datos local
+*.db
+*.sqlite
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+
+# Conda / venv
+env/
+venv/
+.conda/
+
+# VS Code
+.vscode/
+
+# Sistema
+.DS_Store
+Thumbs.db
