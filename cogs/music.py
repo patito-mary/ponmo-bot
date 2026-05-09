@@ -25,39 +25,46 @@ class Music(commands.Cog):
             await vc.move_to(channel)
             return vc
         return await channel.connect()
+async def play_stream(self, guild: discord.Guild, url: str):
+    print("[Music] Extrayendo URL del stream...")
+    
+    loop = asyncio.get_event_loop()
 
-    async def play_stream(self, guild: discord.Guild, url: str):
-        vc = guild.voice_client
-        if not vc:
-            return
+    def extract():
+        with yt_dlp.YoutubeDL(YTDL_OPTIONS) as ydl:
+            info = ydl.extract_info(url, download=False)
+            if info.get("is_live"):
+                return info["url"]
+            formats = info.get("formats", [info])
+            audio = next(
+                (f for f in formats if f.get("acodec") != "none" and f.get("vcodec") == "none"),
+                formats[-1]
+            )
+            return audio["url"]
 
-        loop = asyncio.get_event_loop()
+    stream_url = await loop.run_in_executor(None, extract)
+    print("[Music] URL extraída, conectando...")
 
-        def extract():
-            with yt_dlp.YoutubeDL(YTDL_OPTIONS) as ydl:
-                info = ydl.extract_info(url, download=False)
-                # Para streams en vivo
-                if info.get("is_live"):
-                    return info["url"]
-                # Para videos normales
-                formats = info.get("formats", [info])
-                audio = next(
-                    (f for f in formats if f.get("acodec") != "none" and f.get("vcodec") == "none"),
-                    formats[-1]
-                )
-                return audio["url"]
+    # Re-obtener el voice client DESPUÉS de la extracción
+    vc = guild.voice_client
+    if not vc or not vc.is_connected():
+        print("[Music] Voice client perdido, abortando...")
+        return
 
-        stream_url = await loop.run_in_executor(None, extract)
+    if vc.is_playing():
+        vc.stop()
 
-        if vc.is_playing():
-            vc.stop()
-
-        vc.play(
-            discord.FFmpegPCMAudio(stream_url, **FFMPEG_OPTIONS),
-            after=lambda e: print(f"[Music] Stream terminó: {e}" if e else "[Music] Stream terminó")
-        )
-        vc.source = discord.PCMVolumeTransformer(vc.source)
-        vc.source.volume = 0.4  # 40% de volumen por defecto
+    print("[Music] Reproduciendo...")
+    vc.play(
+        discord.FFmpegPCMAudio(
+            stream_url,
+            executable="C:\\ffmpeg\\bin\\ffmpeg.exe",
+            **FFMPEG_OPTIONS
+        ),
+        after=lambda e: print(f"[Music] Error: {e}" if e else "[Music] Stream terminó")
+    )
+    vc.source = discord.PCMVolumeTransformer(vc.source)
+    vc.source.volume = 0.2
 
     async def stop(self, guild: discord.Guild):
         vc = guild.voice_client
